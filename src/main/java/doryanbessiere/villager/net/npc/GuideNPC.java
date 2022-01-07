@@ -1,0 +1,25 @@
+package doryanbessiere.villager.net.npc;
+
+import doryanbessiere.villager.net.VillagerPlugin;
+import doryanbessiere.villager.net.commons.config.ConfigurationUtils;
+import doryanbessiere.villager.net.commons.npc.NPC;
+import doryanbessiere.villager.net.player.VillagerPlayer;
+import doryanbessiere.villager.net.village.Village;
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class GuideNPC extends NPC {
+
+    public GuideNPC(String name, String textures, String signature, boolean lookAtMe) {
+        super(name, textures, signature, lookAtMe);
+    }
+
+    public void spawn(VillagerPlayer player){
+        spawn(ConfigurationUtils.getLocation(VillagerPlugin.getInstance().getConfig(), "npc.guide.spawn"), player.getPlayer());
+    }
+
+    public static GuideNPC create()
+    {
+        FileConfiguration config = VillagerPlugin.getInstance().getConfig();
+        return new GuideNPC("§8[Guide] §7Bob", config.getString("npc.guide.textures"), config.getString("npc.guide.signature"), true);
+    }
+}

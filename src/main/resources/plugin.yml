@@ -1,0 +1,10 @@
+main: doryanbessiere.villager.net.VillagerPlugin
+name: Villager
+author: Doryan BESSIERE
+version: 0.0.1
+commands:
+  villager:
+  money:
+  npc:
+libraries:
+  - com.squareup.okhttp3:okhttp:4.9.0

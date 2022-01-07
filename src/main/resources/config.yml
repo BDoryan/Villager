@@ -1,0 +1,19 @@
+spawn:
+  x: 0
+  y: 0
+  z: 0
+  world: "world"
+  yaw: 0
+  pitch: 0
+npc:
+  guide:
+    textures: "ewogICJ0aW1lc3RhbXAiIDogMTY0MTE3ODg4NzcxMSwKICAicHJvZmlsZUlkIiA6ICJmM2JmZWU3OTMzNmQ0ZDQ5YTI0YTc4ZjNmMDlhNGY5YyIsCiAgInByb2ZpbGVOYW1lIiA6ICJNQUtPU1RPIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzE2N2JhZjU2ZjdhNzc2NzU0NDZkMjNhMmY3ZDA4MDA3OTRlMjgzYjdiNmI5ZWNkODIxZjdhNzVhYjZjYTk5MzMiCiAgICB9CiAgfQp9"
+    signature: "CtxTUSoHZ3PdWs2QU6sLrR8An0Zjt3UhxtGJ9dAA991y+2wWxs9Ess+mvp+XUaU1aE8VRYwONf1SNPB5lhxpXSyrUwcx8PLNmpIxi4FsBq2AGNjm9xgamKpzRCDhg63W1b4XBIzSSibOzRZk4yiWlZTjv5UO7gH9gQtilSLGQGHkAI22DSuZHTLBHX3B8/GWUmf+xwASQX/mG8Zze7QgVpc/2cbD972iFvYx044o9ahX1aPUO1Ha5yIir8HYpzuZ8Rn72EQ1NtDRGy8S1tB9neZ1HsDvMHMVt9m+Y3yLl29xnfmpzfCqbWM+oL6itkZnse1+BowFVM3vfmPK8b2uJYIrG0WhKbNpeXGobePLomrWDZCwY8J2jUtkHB27oPzXgBNKbHypa9mVjDRdrdbW5UNU7B8VILBvgcPsWV12NK/Z0lHbpbOVsvaGFWo4/FI4Wlq9VQYrPt1eRmgKA6OYecHqsp+vGRA1SwR+KwvwFxeGzyBIRMtq5NGl6FvRvmL7A+MlAf+gUpGg4HKU9rfj2kcw8ojw3zc7HgbpVgCX9Q3lstXdylj7VfbP8Ajr6MRb76g5BxoCYyi+6KrOpJLpQvs08sUPmdyyIllHl4PzjXuNqWaWIcb25oNjZ6CuYMskNtg31pK2QONytA1IYVK4AqgVHy7/hjki6462X1GPsO0="
+    spawn:
+      x: 0
+      y: 0
+      z: 0
+      world: "world"
+      yaw: 0
+      pitch: 0
+    pathfinidng: null
