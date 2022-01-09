@@ -1,4 +1,4 @@
-package doryanbessiere.villager.net.store;
+package doryanbessiere.villager.net.player.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

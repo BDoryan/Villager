@@ -2,7 +2,7 @@ package doryanbessiere.villager.net.listener.listeners;
 
 import doryanbessiere.villager.net.VillagerPlugin;
 import doryanbessiere.villager.net.player.VillagerPlayer;
-import doryanbessiere.villager.net.store.StoragePlayerAbstract;
+import doryanbessiere.villager.net.player.storage.StoragePlayerAbstract;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

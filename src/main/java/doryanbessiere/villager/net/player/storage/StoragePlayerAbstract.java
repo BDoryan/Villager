@@ -1,4 +1,4 @@
-package doryanbessiere.villager.net.store;
+package doryanbessiere.villager.net.player.storage;
 
 import doryanbessiere.villager.net.player.VillagerPlayer;
 import org.bukkit.entity.Player;

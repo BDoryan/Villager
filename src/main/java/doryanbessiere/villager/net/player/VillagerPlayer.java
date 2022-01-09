@@ -5,7 +5,7 @@ import doryanbessiere.villager.net.commons.Lang;
 import doryanbessiere.villager.net.commons.config.ConfigurationUtils;
 import doryanbessiere.villager.net.commons.packet.PacketReader;
 import doryanbessiere.villager.net.npc.GuideNPC;
-import doryanbessiere.villager.net.store.StoragePlayerAbstract;
+import doryanbessiere.villager.net.player.storage.StoragePlayerAbstract;
 import doryanbessiere.villager.net.commons.quest.AbstractQuest;
 import doryanbessiere.villager.net.commons.quest.QuestData;
 import org.bukkit.Bukkit;
