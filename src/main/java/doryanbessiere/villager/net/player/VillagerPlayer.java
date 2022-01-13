@@ -3,11 +3,19 @@ package doryanbessiere.villager.net.player;
 import doryanbessiere.villager.net.VillagerPlugin;
 import doryanbessiere.villager.net.commons.Lang;
 import doryanbessiere.villager.net.commons.config.ConfigurationUtils;
+import doryanbessiere.villager.net.commons.dialog.Dialog;
 import doryanbessiere.villager.net.commons.packet.PacketReader;
 import doryanbessiere.villager.net.npc.GuideNPC;
+import doryanbessiere.villager.net.npc.NPCManager;
+import doryanbessiere.villager.net.npc.TownManagerNPC;
 import doryanbessiere.villager.net.player.storage.StoragePlayerAbstract;
 import doryanbessiere.villager.net.commons.quest.AbstractQuest;
 import doryanbessiere.villager.net.commons.quest.QuestData;
+import doryanbessiere.villager.net.village.Village;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -24,6 +32,8 @@ public class VillagerPlayer {
     private long firstConnection;
     private long lastConnection;
 
+    private String villageName;
+
     private boolean tutoSkipped = false;
     private QuestData questData;
     private ArrayList<Integer> questDone = new ArrayList<>();
@@ -35,9 +45,7 @@ public class VillagerPlayer {
     }
 
     public void disconnect(){
-        VillagerPlugin.getVillagerPlayers().remove(this);
-
-        this.packetReader.uninject(getPlayer());
+        uninitialize();
 
         this.lastConnection = System.currentTimeMillis();
         update();
@@ -48,10 +56,7 @@ public class VillagerPlayer {
     private transient GuideNPC guide;
 
     public void connect(){
-        VillagerPlugin.getVillagerPlayers().add(this);
-
-        this.packetReader = new PacketReader();
-        this.packetReader.inject(getPlayer());
+        initialize();
 
         this.lastConnection = System.currentTimeMillis();
 
@@ -82,6 +87,27 @@ public class VillagerPlayer {
     }
 
     public void welcome(){
+    }
+
+    public void uninitialize(){
+        VillagerPlugin.getVillagerPlayers().remove(this);
+
+        this.packetReader.uninject(getPlayer());
+
+        NPCManager.uninitialize(this);
+
+        if(Dialog.playersInDialog.containsKey(this)){
+            Dialog.playersInDialog.get(this).setStop(true);
+        }
+    }
+
+    public void initialize(){
+        VillagerPlugin.getVillagerPlayers().add(this);
+
+        this.packetReader = new PacketReader();
+        this.packetReader.inject(getPlayer());
+
+        NPCManager.initialize(this);
     }
 
     public void update(){
@@ -132,10 +158,28 @@ public class VillagerPlayer {
     public void setQuest(AbstractQuest quest) {
         this.quest = quest;
         this.questData = (QuestData) quest;
+        update();
+    }
+
+    public void setVillage(String villageName) {
+        this.villageName = villageName;
+        update();
     }
 
     public QuestData getQuestData() {
         return questData;
+    }
+
+    public boolean hasVillage(){
+        return villageName != null;
+    }
+
+    public Village getVillage(){
+        return VillagerPlugin.getVillageStore().getVillage(getVillageName());
+    }
+
+    public String getVillageName() {
+        return villageName;
     }
 
     public AbstractQuest getCurrentQuest() {

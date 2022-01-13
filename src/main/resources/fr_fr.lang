@@ -1,15 +1,34 @@
+#Dialog
 dialog_guide_sentence_1=Bienvenue à toi %player%, nous te souhaitons la bienvenue dans notre royaume, je veux que tu saches qu'ici tu resteras en sécurité quoi qu’il se passe.
 dialog_guide_sentence_2=Je vais être ton guide pour le début de ton aventure, il va falloir que tu m'écoutes attentivement pour qu'à la fin de la visite guidée tu ne sois pas perdu.
 dialog_guide_sentence_3=Allez suis-moi
-
 dialog_guide_sentence_4=Nous voilà arrivé à notre première endroit, ici, je vais te présenter Arthur, c’est lui qui s’occupe de tout la gestion de tous les villages du pays.
 dialog_guide_sentence_5=C’est par lui que tu dois passer si tu as l’envie de créer ou de supprimer ton village, mais bon, actuellement ce n’est pas l’objectif tu viens a peine d'arriver dans le royaume.
 dialog_guide_sentence_6=Je pense que tu auras le temps de discuter avec lui une prochaine fois, continuons la visite.
 
+dialog_townmanager_sentence_1=Bonjour à toi %player%, je suis la personne qui s'occupe de la gestion de tout les villages.
+dialog_townmanager_sentence_2=Si tu as l'envie de créer ton village, tu dois t'adresser à moi, si tu veux démissionner ton village il faut aussi que tu t'adresse à moi, le reste doit être gérer depuis ton village.
+dialog_townmanager_sentence_3=Qu'est-ce que tu veux faire ?
 
+dialog_townmanager_create_village=Créer mon village
+dialog_townmanager_create_hover_village=§7Si vous avez l'envie de créer votre propre village, vous savoir qu'il faut que vous soyez dans aucun autre village. Mais aussi lorsque vous allez vouloir le créer, afin de terminer la procédure et commencer à inviter des joueurs il faut acheter des terres, par la suite vous pourrez commencer la vie de votre village.
+dialog_townmanager_claim_item_village=Je veux le papier pour acheter des terrains
+dialog_townmanager_claim_item_hover_village=§7Lorsque vous avez votre village, afin de développer votre village vous allez devoir acheter des terres, grâce à ce papier vous aurez la possiblité de le faire.
+dialog_townmanager_resign_village=Demande à démissionner
+dialog_townmanager_resign_hover_village=§cSi vous venez à démissionner de votre village, la place de chef ne sera plus à vous et donc vous aurez à plus à le gérer, par la suite des élections seront mise en oeuvre pendant une durée de 24H
+
+you_are_already_in_dialog=Vous êtes déjà en dialog
+distance_stop_dialog=Vous vous êtes trop éloigné pour continuer la discussion
+
+# Commands
+command_village_name_question=Comment voulez-vous appelée votre village ? 
+command_village_name_already_used=Impossible de créer votre village, ce nom est déjà utilisé!
+command_village_you_are_already_in_a_village=Vous êtes déjà dans un village, veuillez le quitter afin créer votre village.
+command_village_create_success=Bravo, votre village à bien été créée.
+command_village_create_error=Nous sommes désolé, nous sommes dans la possibilité de créer votre village.
+command_village_you_are_already_in_dialog=Veuillez déjà repondre à la question précédente
+
+# Quests
 welcome_quest=Quête de bienvenue
 
 you_have_already_a_quest=Vous avez déjà une quête
-
-you_are_already_at_war_with_this_village=Vous êtes déjà en guerre avec ce village!
-you_are_already_allied_with_this_village=Vous êtes déjà alliée avec ce village!

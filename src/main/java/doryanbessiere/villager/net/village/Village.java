@@ -1,51 +1,46 @@
 package doryanbessiere.villager.net.village;
 
+import doryanbessiere.villager.net.VillagerPlugin;
 import doryanbessiere.villager.net.exceptions.AllianceIsAlreadyDeclaredException;
 import doryanbessiere.villager.net.exceptions.WarIsAlreadyDeclaredException;
 import doryanbessiere.villager.net.player.VillagerPlayer;
+import doryanbessiere.villager.net.player.storage.StoragePlayerAbstract;
+import doryanbessiere.villager.net.village.storage.StorageVillageAbstract;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class Village {
 
-    private String uuid = UUID.randomUUID().toString();
     private String name;
-    private String owner;
+    private String ownerUUID;
+
+    private int score;
 
     private ArrayList<String> villager = new ArrayList<>();
 
-    // Déclaration de guerre en cours...
-    private ArrayList<String> declarations_of_war = new ArrayList<>();
-
-    // Déclaration de d'alliance en cours...
-    private ArrayList<String> declarations_of_alliance = new ArrayList<>();
-
-    private ArrayList<String> allies = new ArrayList<>();
-    private ArrayList<String> enemies = new ArrayList<>();
-
-    public Village(String name, String owner, ArrayList<String> villager) {
+    public Village(String name, VillagerPlayer owner, ArrayList<String> villager) {
         this.name = name;
-        this.owner = owner;
+        this.ownerUUID = owner.getUUID();
         this.villager = villager;
-        this.villager.add(this.owner);
+        this.villager.add(this.ownerUUID);
+
+        owner.setVillage(name);
     }
 
-    public void declarationOfWar(VillagerPlayer villagerPlayer, Village village) throws WarIsAlreadyDeclaredException {
-        if(village.getEnemies().contains(village.getUUID())){
-            throw new WarIsAlreadyDeclaredException(villagerPlayer, this, village);
-        }
+    public Village(String name, String ownerUUID) {
+        this(name, VillagerPlugin.getVillagerPlayerStore().getVillager(ownerUUID));
     }
 
-    public void declarationOfAlliance(VillagerPlayer villagerPlayer, Village village) throws AllianceIsAlreadyDeclaredException {
-        if(village.getAllies().contains(village.getUUID())){
-            throw new AllianceIsAlreadyDeclaredException(villagerPlayer, this, village);
-        }
+    public Village(String name, VillagerPlayer villagerPlayer) {
+        this(name, villagerPlayer, new ArrayList<>());
     }
 
     public boolean addVillager(VillagerPlayer player){
         if(!villager.contains(player.getUUID())){
             villager.add(player.getUUID());
+            update();
             return true;
         }
         return false;
@@ -58,37 +53,24 @@ public class Village {
     public boolean removeVillager(VillagerPlayer player){
         if(villager.contains(player.getUUID())){
             villager.remove(player.getUUID());
+            player.setVillage(null);
+            update();
             return true;
         }
         return false;
     }
 
-    public String getUUID() {
-        return uuid;
+    public void update(){
+        StorageVillageAbstract storage = VillagerPlugin.getVillageStore();
+        storage.updateVillage(this);
     }
 
     public String getName() {
         return name;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
-    public ArrayList<String> getAllies() {
-        return allies;
-    }
-
-    public ArrayList<String> getEnemies() {
-        return enemies;
-    }
-
-    public ArrayList<String> getDeclarationsOfWar() {
-        return declarations_of_war;
-    }
-
-    public ArrayList<String> getDeclarationsOfAlliance() {
-        return declarations_of_alliance;
+    public String getOwnerUUID() {
+        return ownerUUID;
     }
 
     public ArrayList<String> getVillager() {

@@ -32,8 +32,8 @@ public class PacketReader {
 
         if(channel.pipeline().get("PacketInjector") != null)return;
 
+        if(!player.isOnline())return;
         channel.pipeline().addAfter("decoder", "PacketInjector", new MessageToMessageDecoder<Packet<?>>() {
-
             @Override
             protected void decode(ChannelHandlerContext channelHandlerContext, Packet<?> packet, List<Object> arg) throws Exception {
                 arg.add(packet);
@@ -64,8 +64,8 @@ public class PacketReader {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        if(id == npc.getServerPlayer().getId()){
-                            Bukkit.getPluginManager().callEvent(new NPCRightClientEvent(player, npc.getServerPlayer()));
+                        if(id == npc.getId()){
+                            Bukkit.getPluginManager().callEvent(new NPCRightClientEvent(player, npc));
                         }
                     }
                 }.runTask(VillagerPlugin.getInstance());

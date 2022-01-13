@@ -1,6 +1,6 @@
 package doryanbessiere.villager.net.commons.economy;
 
-import doryanbessiere.villager.net.items.CustomItems;
+import doryanbessiere.villager.net.item.CustomItems;
 import org.bukkit.inventory.ItemStack;
 
 public enum CoinType {

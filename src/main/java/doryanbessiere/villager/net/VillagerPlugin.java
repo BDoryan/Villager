@@ -2,14 +2,19 @@ package doryanbessiere.villager.net;
 
 import doryanbessiere.villager.net.commands.MoneyCommand;
 import doryanbessiere.villager.net.commands.NPCCommand;
+import doryanbessiere.villager.net.commands.VillageCommand;
 import doryanbessiere.villager.net.commons.Lang;
 import doryanbessiere.villager.net.commons.command.CommandManager;
+import doryanbessiere.villager.net.commons.dialog.Dialog;
 import doryanbessiere.villager.net.commons.npc.NPC;
 import doryanbessiere.villager.net.listener.ListenerManager;
 import doryanbessiere.villager.net.listener.listeners.PlayerConnectionListener;
 import doryanbessiere.villager.net.player.VillagerPlayer;
 import doryanbessiere.villager.net.player.storage.StoragePlayerAbstract;
 import doryanbessiere.villager.net.player.storage.StoragePlayerByFile;
+import doryanbessiere.villager.net.village.Village;
+import doryanbessiere.villager.net.village.storage.StorageVillageAbstract;
+import doryanbessiere.villager.net.village.storage.StorageVillageByFile;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,6 +26,7 @@ public class VillagerPlugin extends JavaPlugin {
 
     private static VillagerPlugin instance;
     private static StoragePlayerAbstract villagerPlayerStore;
+    private static StorageVillageAbstract villageStore;
     private static ArrayList<VillagerPlayer> villagerPlayers = new ArrayList<>();
 
     private static HashMap<String, Lang> langs = new HashMap<>();
@@ -30,7 +36,9 @@ public class VillagerPlugin extends JavaPlugin {
         super.onLoad();
 
         instance = this;
+
         villagerPlayerStore = new StoragePlayerByFile();
+        villageStore = new StorageVillageByFile();
     }
 
     private CommandManager commandManager;
@@ -45,18 +53,22 @@ public class VillagerPlugin extends JavaPlugin {
             public void loadCommands() {
                 setCommand(new NPCCommand());
                 setCommand(new MoneyCommand());
+                setCommand(new VillageCommand());
             }
         };
         commandManager.defaultCommand();
         commandManager.loadCommands();
 
         ListenerManager.registerListeners();
+
         NPC.init();
+        Dialog.init();
 
         langs.put("fr_fr", new Lang("fr_fr"));
 
         Bukkit.getOnlinePlayers().forEach((player -> {
             PlayerConnectionListener.join(player);
+            if(player.isOp())player.sendMessage("§7[§cRappel§7] §fLorsque on effectue un §7reload §fdu plugin, le joueur ne peut plus intéragir avec les NPCs. §7(Déconnexion et reconnexion nécessaire)");
         }));
     }
 
@@ -77,6 +89,10 @@ public class VillagerPlugin extends JavaPlugin {
 
     public static StoragePlayerAbstract getVillagerPlayerStore() {
         return villagerPlayerStore;
+    }
+
+    public static StorageVillageAbstract getVillageStore() {
+        return villageStore;
     }
 
     public static ArrayList<VillagerPlayer> getVillagerPlayers() {

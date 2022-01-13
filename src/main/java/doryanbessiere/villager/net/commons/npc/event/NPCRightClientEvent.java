@@ -1,7 +1,6 @@
 package doryanbessiere.villager.net.commons.npc.event;
 
-import net.minecraft.server.level.EntityPlayer;
-import net.minecraft.server.level.ServerPlayer;
+import doryanbessiere.villager.net.commons.npc.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -10,17 +9,17 @@ import org.bukkit.event.HandlerList;
 public class NPCRightClientEvent extends Event implements Cancellable {
 
     private final Player player;
-    private final ServerPlayer npc;
+    private final NPC npc;
     private boolean isCancelled;
 
     public static final HandlerList HANDLERS = new HandlerList();
 
-    public NPCRightClientEvent(Player player, ServerPlayer npc) {
+    public NPCRightClientEvent(Player player, NPC npc) {
         this.player = player;
         this.npc = npc;
     }
 
-    public ServerPlayer getNPC() {
+    public NPC getNPC() {
         return npc;
     }
 

@@ -14,43 +14,6 @@ public class StoragePlayerByFile extends StoragePlayerAbstract {
     private static final Gson GSON = new GsonBuilder().create();
     private static final File DIRECTORY = new File("plugins/Villager/villagers/");
 
-    private VillagerPlayer createVillagerPlayerFile(Player player){
-        VillagerPlayer villagerPlayer = new VillagerPlayer(player);
-
-        if(!DIRECTORY.exists()){
-            DIRECTORY.mkdirs();
-        }
-
-        File villagerFile = getVillagerPlayerFile(player.getUniqueId().toString());
-        if(villagerFile.exists()){
-            return getVillager(player.getUniqueId().toString());
-        }
-        try {
-            villagerFile.createNewFile();
-            writeVillagerPlayerToFile(villagerFile, villagerPlayer);
-            return villagerPlayer;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    private void writeVillagerPlayerToFile(File villagerFile, VillagerPlayer villagerPlayer){
-        try {
-            FileWriter writer = new FileWriter(villagerFile);
-            writer.write(GSON.toJson(villagerPlayer));
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private File getVillagerPlayerFile(String uuidString){
-        File villagerFile = new File(DIRECTORY, uuidString+".json");
-        return villagerFile;
-    }
-
     @Override
     public VillagerPlayer getVillager(String uuidString) {
         File villagerFile = getVillagerPlayerFile(uuidString);
@@ -100,4 +63,42 @@ public class StoragePlayerByFile extends StoragePlayerAbstract {
         }
         return false;
     }
+
+    private VillagerPlayer createVillagerPlayerFile(Player player){
+        VillagerPlayer villagerPlayer = new VillagerPlayer(player);
+
+        if(!DIRECTORY.exists()){
+            DIRECTORY.mkdirs();
+        }
+
+        File villagerFile = getVillagerPlayerFile(player.getUniqueId().toString());
+        if(villagerFile.exists()){
+            return getVillager(player.getUniqueId().toString());
+        }
+        try {
+            villagerFile.createNewFile();
+            writeVillagerPlayerToFile(villagerFile, villagerPlayer);
+            return villagerPlayer;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private void writeVillagerPlayerToFile(File villagerFile, VillagerPlayer villagerPlayer){
+        try {
+            FileWriter writer = new FileWriter(villagerFile);
+            writer.write(GSON.toJson(villagerPlayer));
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private File getVillagerPlayerFile(String uuidString){
+        File villagerFile = new File(DIRECTORY, uuidString+".json");
+        return villagerFile;
+    }
+
 }

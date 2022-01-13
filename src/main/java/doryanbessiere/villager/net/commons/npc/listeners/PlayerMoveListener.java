@@ -20,6 +20,9 @@ public class PlayerMoveListener implements Listener {
     public void PlayerMoveEvent_(PlayerMoveEvent event){
         Player player = event.getPlayer();
 
+        Location from = event.getFrom();
+        Location to = event.getTo();
+
         ArrayList<NPC> NPCs = NPC.getPlayerNPCs(player);
         if(NPCs.size() > 0){
             NPCs.stream().filter(npc -> npc.hasLookAtMe() && !npc.isWalking()).forEach(npc -> {

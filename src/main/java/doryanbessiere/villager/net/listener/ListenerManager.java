@@ -13,5 +13,4 @@ public class ListenerManager {
 
         pm.registerEvents(new PlayerConnectionListener(), plugin);
     }
-
 }

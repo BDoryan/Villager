@@ -6,6 +6,8 @@ import doryanbessiere.villager.net.commons.command.SimpleCommand;
 import doryanbessiere.villager.net.commons.config.ConfigurationUtils;
 import doryanbessiere.villager.net.commons.npc.NPC;
 import doryanbessiere.villager.net.commons.npc.NPCPathfinding;
+import doryanbessiere.villager.net.npc.NPCManager;
+import doryanbessiere.villager.net.npc.TownManagerNPC;
 import doryanbessiere.villager.net.player.VillagerPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -30,11 +32,17 @@ public class NPCCommand extends SimpleCommand {
                 ConfigurationUtils.setLocation(VillagerPlugin.getInstance().getConfig(), player.getLocation(), "npc.guide.spawn", true);
                 Commons.sendMessage(player, "§7Vous avez désormais défini le point d'apparition du guide du début.");
                 VillagerPlugin.saveConfiguration();
+            } else if(arg1.equalsIgnoreCase("settownmanager") && sender instanceof Player) {
+                Player player = (Player) sender;
+
+                ConfigurationUtils.setLocation(VillagerPlugin.getInstance().getConfig(), player.getLocation(), "npc.town-manager.spawn", true);
+                Commons.sendMessage(player, "§7Vous avez désormais défini le point d'apparition du directeur municipal du début.");
+                VillagerPlugin.saveConfiguration();
             } else if(arg1.equalsIgnoreCase("debug") && sender instanceof Player) {
                 Player player = (Player) sender;
                 VillagerPlayer villagerPlayer = VillagerPlugin.getVillager(player);
 
-                NPC npc = villagerPlayer.getGuide();
+                NPC npc = TownManagerNPC.NPC;
 
                 npc.walk(player.getLocation());
 

@@ -6,6 +6,8 @@ import doryanbessiere.villager.net.VillagerPlugin;
 import doryanbessiere.villager.net.commons.npc.event.NPCRightClientEvent;
 import doryanbessiere.villager.net.commons.npc.listeners.PlayerMoveListener;
 import doryanbessiere.villager.net.commons.npc.listeners.PlayerNPCRightclickListener;
+import doryanbessiere.villager.net.npc.TownManagerNPC;
+import doryanbessiere.villager.net.player.VillagerPlayer;
 import net.minecraft.network.protocol.game.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -131,6 +133,10 @@ public class NPC {
         });
     }
 
+    public void click(Player player){
+
+    }
+
     public void remove(){
         Arrays.stream(players).forEach(player -> {
             CraftPlayer craftPlayer = ((CraftPlayer) player);
@@ -141,6 +147,22 @@ public class NPC {
             getPlayerNPCs(player).remove(this);
             STORAGES.remove(this);
         });
+    }
+
+    public void unspawn(Player... players){
+        Arrays.stream(players).forEach(player -> {
+            CraftPlayer craftPlayer = ((CraftPlayer) player);
+            ServerPlayer sp = craftPlayer.getHandle();
+            ServerGamePacketListenerImpl ps = sp.connection;
+            ps.send(new ClientboundPlayerInfoPacket(ClientboundPlayerInfoPacket.Action.REMOVE_PLAYER, this.getServerPlayer()));
+            ps.send(new PacketPlayOutEntityDestroy(serverPlayer.getId()));
+            getPlayerNPCs(player).remove(this);
+            STORAGES.remove(this);
+        });
+    }
+
+    public Location getLocation(){
+        return serverPlayer.getBukkitEntity().getLocation();
     }
 
     public void walk(Location location) {
@@ -188,7 +210,6 @@ public class NPC {
                     }
 
                     npc.setPos(to.getX(), to.getY(), to.getZ());
-                    location.getWorld().spawnParticle(Particle.HEART, to, 100);
                     move(from, to, (byte) ((headDirection[0]%360)* 256/360), (byte) ((headDirection[1]%360)* 256/360));
 
                     walking = true;
@@ -291,6 +312,10 @@ public class NPC {
 
     public void setLookAtMe(boolean lookAtMe) {
         this.lookAtMe = lookAtMe;
+    }
+
+    public int getId(){
+        return getServerPlayer().getId();
     }
 
     public boolean hasLookAtMe() {

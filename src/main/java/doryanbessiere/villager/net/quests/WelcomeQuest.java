@@ -71,6 +71,10 @@ public class WelcomeQuest extends AbstractQuest {
         Dialog dialog = new Dialog(player){
             @Override
             public void finish() {
+            }
+
+            @Override
+            public void end() {
                 next(villagerPlayer);
             }
         };
@@ -99,6 +103,11 @@ public class WelcomeQuest extends AbstractQuest {
         Dialog dialog = new Dialog(player){
             @Override
             public void finish() {
+
+            }
+
+            @Override
+            public void end() {
                 next(villagerPlayer);
             }
         };
