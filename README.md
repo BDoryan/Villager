@@ -1,5 +1,7 @@
 # Villager
 
+> ⚠️ **Disclaimer** : Ce projet est un ancien développement personnellement. Il a été récemment mis à jour et rendu public. Il remonte à cette époque et n'a pas eu de maintenance active depuis.
+
 Plugin Minecraft (Spigot/Paper) pour gerer un systeme de villages, PNJ, quetes et economie.
 
 ## Fonctionnalites
